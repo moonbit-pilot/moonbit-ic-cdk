@@ -1,0 +1,176 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "ic-cdk-moonbit/ic0"
+
+import(
+  "moonbitlang/core/bigint"
+)
+
+// Values
+fn accept_message() -> Unit
+
+fn call_cycles_add(Int64) -> Unit
+
+fn call_cycles_add128(Int64, Int64) -> Unit
+
+fn call_data_append(Int, Int) -> Unit
+
+fn call_new(Int, Int, Int, Int, Int, Int, Int, Int) -> Unit
+
+fn call_on_cleanup(Int, Int) -> Unit
+
+fn call_perform() -> Int
+
+fn canister_balance128_wrap() -> @bigint.BigInt
+
+fn canister_balance_wrap() -> UInt64
+
+fn canister_cycle_balance() -> Int64
+
+fn canister_cycle_balance128(Int) -> Unit
+
+fn canister_self_copy(Int, Int, Int) -> Unit
+
+fn canister_self_size() -> Int
+
+fn canister_status() -> Int
+
+fn canister_version() -> Int64
+
+fn certified_data_set(Int, Int) -> Unit
+
+fn cycles_burn128(Int64, Int64, Int) -> Unit
+
+fn data_certificate_copy(Int, Int, Int) -> Unit
+
+fn data_certificate_present() -> Int
+
+fn data_certificate_size() -> Int
+
+fn data_certificate_wrap() -> Bytes?
+
+fn debug(String) -> Unit
+
+fn debug_print(Int, Int) -> Unit
+
+fn global_timer_set(Int64) -> Int64
+
+fn in_replicated_execution() -> Int
+
+fn instruction_counter() -> Int64
+
+fn is_controller(Int, Int) -> Int
+
+fn msg_arg_data_copy(Int, Int, Int) -> Unit
+
+fn msg_arg_data_size() -> Int
+
+fn msg_caller_copy(Int, Int, Int) -> Unit
+
+fn msg_caller_size() -> Int
+
+fn msg_cycles_accept(Int64) -> Int64
+
+fn msg_cycles_accept128(Int64, Int64, Int) -> Unit
+
+fn msg_cycles_accept128_wrap(@bigint.BigInt) -> @bigint.BigInt
+
+fn msg_cycles_accept_wrap(UInt64) -> UInt64
+
+fn msg_cycles_available() -> Int64
+
+fn msg_cycles_available128(Int) -> Unit
+
+fn msg_cycles_available128_wrap() -> @bigint.BigInt
+
+fn msg_cycles_available_wrap() -> UInt64
+
+fn msg_cycles_refunded() -> Int64
+
+fn msg_cycles_refunded128(Int) -> Unit
+
+fn msg_cycles_refunded128_wrap() -> @bigint.BigInt
+
+fn msg_cycles_refunded_wrap() -> UInt64
+
+fn msg_method_name_copy(Int, Int, Int) -> Unit
+
+fn msg_method_name_size() -> Int
+
+fn msg_reject(Int, Int) -> Unit
+
+fn msg_reject_code() -> Int
+
+fn msg_reject_msg_copy(Int, Int, Int) -> Unit
+
+fn msg_reject_msg_size() -> Int
+
+fn msg_reply() -> Unit
+
+fn msg_reply_data_append(Int, Int) -> Unit
+
+fn performance_counter(Int) -> Int64
+
+fn performance_counter_wrap(UInt) -> UInt64
+
+fn print_wrap(String) -> Unit
+
+fn reject(String) -> Unit
+
+fn reject_with_msg(String) -> Unit
+
+fn reply(FixedArray[Byte]) -> Unit
+
+fn reply_with_data(Bytes) -> Unit
+
+fn set_certified_data_wrap(Bytes) -> Unit
+
+fn stable64_grow(Int64) -> Int64
+
+fn stable64_grow_wrap(UInt64) -> UInt64?
+
+fn stable64_read(Int64, Int64, Int64) -> Unit
+
+fn stable64_read_wrap(UInt64, UInt64) -> Bytes
+
+fn stable64_size() -> Int64
+
+fn stable64_size_wrap() -> UInt64
+
+fn stable64_write(Int64, Int64, Int64) -> Unit
+
+fn stable64_write_wrap(UInt64, Bytes) -> Unit
+
+fn stable_grow(Int) -> Int
+
+fn stable_grow_wrap(UInt) -> UInt?
+
+fn stable_read(Int, Int, Int) -> Unit
+
+fn stable_read_wrap(UInt, UInt) -> Bytes
+
+fn stable_size() -> Int
+
+fn stable_size_wrap() -> UInt
+
+fn stable_write(Int, Int, Int) -> Unit
+
+fn stable_write_wrap(UInt, Bytes) -> Unit
+
+fn time() -> Int64
+
+fn time_wrap() -> UInt64
+
+fn trap(Int, Int) -> Unit
+
+fn trap_msg(String) -> Unit
+
+fn trap_with_msg(String) -> Unit
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+

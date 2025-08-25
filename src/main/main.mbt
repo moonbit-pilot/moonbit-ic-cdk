@@ -65,9 +65,9 @@ pub fn trap_test() -> Unit {
 ///|
 pub fn instruction_counter() -> Unit {
   let start = @ic0.instruction_counter()
-  let mut acc = 0
+  let mut _acc = 0
   for i = 0; i < 1000; i = i + 1 {
-    acc += i
+    _acc += i
   }
   let end = @ic0.instruction_counter()
   let elapsed = end - start

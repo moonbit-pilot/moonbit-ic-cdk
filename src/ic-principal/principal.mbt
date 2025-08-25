@@ -6,14 +6,15 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // 1. 错误类型
+
 ///|
-suberror PrincipalError {
+pub suberror PrincipalError {
   BytesTooLong
   InvalidBase32
-  TextTooShort
+  TextTooShort // Used for error handling in from_text
   TextTooLong
-  CheckSequenceNotMatch
-  AbnormalGrouped(p~ : Principal)
+  CheckSequenceNotMatch // Used for validation in from_text
+  AbnormalGrouped(p~ : Principal) // Used for complex error cases
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -22,10 +23,10 @@ suberror PrincipalError {
 ///|
 fn char_at(s : String, i : Int) -> Char {
   if i < 0 || i >= s.length() {
-    let t : Char = '0'
-    t
+    '0'
   } else {
-    s[i]
+    let bytes = s.to_bytes()
+    Int::unsafe_to_char(bytes[i].to_int())
   }
 }
 
@@ -84,7 +85,7 @@ fn remove_char(s : String, ch : Char) -> String {
 }
 
 ///|
-fn string_slice(s : String, start : Int, length : Int) -> String {
+fn string_slice(s : String, start : Int, length : Int) -> String raise {
   if start < 0 || length < 0 || start + length > s.length() {
     ""
   } else {
@@ -97,7 +98,7 @@ fn string_slice(s : String, start : Int, length : Int) -> String {
 ////////////////////////////////////////////////////////////////////////////////
 
 ///| 简易 Base32 编码
-fn base32_encode(data : Bytes) -> String {
+fn base32_encode(data : Bytes) -> String raise {
   // 定义 Base32 字母表
   let base32_alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567"
   let mut bits = 0
@@ -185,22 +186,19 @@ fn base32_find_index(ch : String, base32_alphabet : String) -> Int {
 const MAX_LENGTH_IN_BYTES : Int = 29
 
 ///|
-const ANONYMOUS_TAG : UInt = 4
-
-///|
-struct Principal {
+pub struct Principal {
   len : UInt
   bytes : Bytes
 } derive(Eq)
 
 ///| 构造 management_canister
-fn Principal::management_canister() -> Principal {
+pub fn Principal::management_canister() -> Principal {
   let fixed_array = FixedArray::make(MAX_LENGTH_IN_BYTES, b'0')
   Principal::{ len: 0, bytes: Bytes::from_fixedarray(fixed_array) }
 }
 
 ///| 构造匿名 principal
-fn Principal::anonymous() -> Principal {
+pub fn Principal::anonymous() -> Principal {
   let arr : FixedArray[Byte] = FixedArray::make(MAX_LENGTH_IN_BYTES, b'0')
   arr[0] = b'4'
   Principal::{ len: 1, bytes: Bytes::from_fixedarray(arr) }
@@ -225,7 +223,7 @@ fn Principal::from_slice(slice : Bytes) -> Principal raise PrincipalError {
 }
 
 ///| from_text：只做 base32 解码 => 长度检查 => roundtrip
-fn Principal::from_text(text : String) -> Principal raise PrincipalError {
+pub fn Principal::from_text(text : String) -> Principal raise PrincipalError {
   let max_len = 29
   let decoded = base32_decode(text)
   if decoded.length() > max_len {
@@ -244,13 +242,14 @@ fn Principal::as_slice(self : Principal) -> Bytes {
 
 ///| to_text：base32 编码 + 每5字符插入 '-' + 转小写
 fn to_text(self : Principal) -> String {
-  let base32_str = base32_encode(self.bytes)
+  let base32_str = base32_encode(self.bytes) catch { _ => "ERROR" }
   let mut s = base32_str
   let mut result = ""
   while s.length() > 5 {
-    let head = string_slice(s, 0, 5)
+    let head = string_slice(s, 0, 5) catch { _ => "" }
     result = result + head + "-"
-    s = string_slice(s, 5, s.length() - 5)
+    let rest = string_slice(s, 5, s.length() - 5) catch { _ => "" }
+    s = rest
   }
   result = result + s
   to_lower(result)
@@ -286,7 +285,7 @@ fn to_text(self : Principal) -> String {
 
 ///|
 test "principal test" {
-  let test_principal_text = "ytoqu-ey42w-sb2ul-m7xgn-oc7xo-i4btp-kuxjc-b6pt4-dwdzu-kfqs4-nae"
+  let _test_principal_text = "ytoqu-ey42w-sb2ul-m7xgn-oc7xo-i4btp-kuxjc-b6pt4-dwdzu-kfqs4-nae"
   let test_principal_slice : Bytes = [
     28, 213, 164, 29, 81, 108, 253, 204, 215, 11, 247, 114, 56, 25, 189, 84, 186,
     68, 31, 62, 124, 29, 135, 154, 40, 176, 151, 26, 2,
@@ -297,7 +296,7 @@ test "principal test" {
 
   // let txt = p.to_text()
   let re_principal = try Principal::from_slice(test_principal_slice) catch {
-    e => fail("principal from slice failed")
+    _ => fail("principal from slice failed")
   } noraise {
     v => v
   }

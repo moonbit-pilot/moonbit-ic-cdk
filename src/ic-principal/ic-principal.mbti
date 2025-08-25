@@ -1,0 +1,29 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "ic-cdk-moonbit/ic-principal"
+
+// Values
+
+// Errors
+pub suberror PrincipalError {
+  BytesTooLong
+  InvalidBase32
+  TextTooShort
+  TextTooLong
+  CheckSequenceNotMatch
+  AbnormalGrouped(p~ : Principal)
+}
+
+// Types and methods
+pub struct Principal {
+  len : UInt
+  bytes : Bytes
+}
+fn Principal::anonymous() -> Self
+fn Principal::from_text(String) -> Self raise PrincipalError
+fn Principal::management_canister() -> Self
+impl Eq for Principal
+
+// Type aliases
+
+// Traits
+
