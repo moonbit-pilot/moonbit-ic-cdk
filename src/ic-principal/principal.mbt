@@ -8,13 +8,10 @@
 // 1. 错误类型
 
 ///|
-suberror PrincipalError {
+pub suberror PrincipalError {
   BytesTooLong
   InvalidBase32
-  TextTooShort
   TextTooLong
-  CheckSequenceNotMatch
-  AbnormalGrouped(p~ : Principal)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -26,7 +23,7 @@ fn char_at(s : String, i : Int) -> Char {
     let t : Char = '0'
     t
   } else {
-    Char::from_int(s[i])
+    Int::unsafe_to_char(s[i])
   }
 }
 
@@ -186,22 +183,22 @@ fn base32_find_index(ch : String, base32_alphabet : String) -> Int {
 const MAX_LENGTH_IN_BYTES : Int = 29
 
 ///|
-const ANONYMOUS_TAG : UInt = 4
+pub const ANONYMOUS_TAG : UInt = 4
 
 ///|
-struct Principal {
+pub struct Principal {
   len : UInt
   bytes : Bytes
 } derive(Eq)
 
 ///| 构造 management_canister
-fn Principal::management_canister() -> Principal {
+pub fn Principal::management_canister() -> Principal {
   let fixed_array = FixedArray::make(MAX_LENGTH_IN_BYTES, b'0')
   Principal::{ len: 0, bytes: Bytes::from_fixedarray(fixed_array) }
 }
 
 ///| 构造匿名 principal
-fn Principal::anonymous() -> Principal {
+pub fn Principal::anonymous() -> Principal {
   let arr : FixedArray[Byte] = FixedArray::make(MAX_LENGTH_IN_BYTES, b'0')
   arr[0] = b'4'
   Principal::{ len: 1, bytes: Bytes::from_fixedarray(arr) }
@@ -226,7 +223,7 @@ fn Principal::from_slice(slice : Bytes) -> Principal raise PrincipalError {
 }
 
 ///| from_text：只做 base32 解码 => 长度检查 => roundtrip
-fn Principal::from_text(text : String) -> Principal raise PrincipalError {
+pub fn Principal::from_text(text : String) -> Principal raise PrincipalError {
   let max_len = 29
   let decoded = base32_decode(text)
   if decoded.length() > max_len {
@@ -287,7 +284,7 @@ fn to_text(self : Principal) -> String {
 
 ///|
 test "principal test" {
-  let test_principal_text = "ytoqu-ey42w-sb2ul-m7xgn-oc7xo-i4btp-kuxjc-b6pt4-dwdzu-kfqs4-nae"
+  let _test_principal_text = "ytoqu-ey42w-sb2ul-m7xgn-oc7xo-i4btp-kuxjc-b6pt4-dwdzu-kfqs4-nae"
   let test_principal_slice : Bytes = [
     28, 213, 164, 29, 81, 108, 253, 204, 215, 11, 247, 114, 56, 25, 189, 84, 186,
     68, 31, 62, 124, 29, 135, 154, 40, 176, 151, 26, 2,
@@ -298,7 +295,7 @@ test "principal test" {
 
   // let txt = p.to_text()
   let re_principal = try Principal::from_slice(test_principal_slice) catch {
-    e => fail("principal from slice failed")
+    _ => fail("principal from slice failed")
   } noraise {
     v => v
   }

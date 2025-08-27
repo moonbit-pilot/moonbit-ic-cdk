@@ -58,6 +58,18 @@ fn msg_caller_copy(Int, Int, Int) -> Unit
 
 fn msg_caller_size() -> Int
 
+fn msg_cycles_accept(Int64) -> Int64
+
+fn msg_cycles_accept128(Int64, Int64, Int) -> Unit
+
+fn msg_cycles_available() -> Int64
+
+fn msg_cycles_available128(Int) -> Unit
+
+fn msg_cycles_refunded() -> Int64
+
+fn msg_cycles_refunded128(Int) -> Unit
+
 fn msg_method_name_copy(Int, Int, Int) -> Unit
 
 fn msg_method_name_size() -> Int
@@ -88,7 +100,11 @@ fn stable64_size() -> Int64
 
 fn stable64_write(Int64, Int64, Int64) -> Unit
 
+fn stable_grow(Int) -> Int
+
 fn stable_read(Int, Int, Int) -> Unit
+
+fn stable_size() -> Int
 
 fn stable_write(Int, Int, Int) -> Unit
 

@@ -72,7 +72,7 @@ pub fn instruction_counter() -> Unit {
   let end = @ic0.instruction_counter()
   let elapsed = end - start
   let elapsed_str =
-    $| elapsed: \{elapsed}
+    $| elapsed: \{elapsed}, sum: \{acc}
   @ic0.debug(elapsed_str)
   @ic0.msg_reply()
 }

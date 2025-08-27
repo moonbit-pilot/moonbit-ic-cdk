@@ -31,22 +31,22 @@ pub fn msg_reply() = "ic0" "msg_reply"
 pub fn msg_reject(src : Int, size : Int) = "ic0" "msg_reject"
 
 ///|
-fn msg_cycles_available() -> Int64 = "ic0" "msg_cycles_available"
+pub fn msg_cycles_available() -> Int64 = "ic0" "msg_cycles_available"
 
 ///|
-fn msg_cycles_available128(dst : Int) = "ic0" "msg_cycles_available128"
+pub fn msg_cycles_available128(dst : Int) = "ic0" "msg_cycles_available128"
 
 ///|
-fn msg_cycles_refunded() -> Int64 = "ic0" "msg_cycles_refunded"
+pub fn msg_cycles_refunded() -> Int64 = "ic0" "msg_cycles_refunded"
 
 ///|
-fn msg_cycles_refunded128(dst : Int) = "ic0" "msg_cycles_refunded128"
+pub fn msg_cycles_refunded128(dst : Int) = "ic0" "msg_cycles_refunded128"
 
 ///|
-fn msg_cycles_accept(max_amount : Int64) -> Int64 = "ic0" "msg_cycles_accept"
+pub fn msg_cycles_accept(max_amount : Int64) -> Int64 = "ic0" "msg_cycles_accept"
 
 ///|
-fn msg_cycles_accept128(
+pub fn msg_cycles_accept128(
   max_amount_high : Int64,
   max_amount_low : Int64,
   dst : Int,
@@ -110,10 +110,10 @@ pub fn call_cycles_add128(amount_high : Int64, amount_low : Int64) = "ic0" "call
 pub fn call_perform() -> Int = "ic0" "call_perform"
 
 ///|
-fn stable_size() -> Int = "ic0" "stable_size"
+pub fn stable_size() -> Int = "ic0" "stable_size"
 
 ///|
-fn stable_grow(new_pages : Int) -> Int = "ic0" "stable_grow"
+pub fn stable_grow(new_pages : Int) -> Int = "ic0" "stable_grow"
 
 ///|
 pub fn stable_write(offset : Int, src : Int, size : Int) = "ic0" "stable_write"

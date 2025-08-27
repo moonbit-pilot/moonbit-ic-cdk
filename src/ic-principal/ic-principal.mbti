@@ -2,12 +2,23 @@
 package "ic-cdk-moonbit/ic-principal"
 
 // Values
+const ANONYMOUS_TAG : UInt = 4
 
 // Errors
-type PrincipalError
+pub suberror PrincipalError {
+  BytesTooLong
+  InvalidBase32
+  TextTooLong
+}
 
 // Types and methods
-type Principal
+pub struct Principal {
+  len : UInt
+  bytes : Bytes
+}
+fn Principal::anonymous() -> Self
+fn Principal::from_text(String) -> Self raise PrincipalError
+fn Principal::management_canister() -> Self
 impl Eq for Principal
 
 // Type aliases
