@@ -1,0 +1,16 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "ic-cdk-moonbit/ic-principal"
+
+// Values
+
+// Errors
+type PrincipalError
+
+// Types and methods
+type Principal
+impl Eq for Principal
+
+// Type aliases
+
+// Traits
+

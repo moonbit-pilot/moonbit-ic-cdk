@@ -46,7 +46,7 @@ pub fn api_print() -> Unit {
 
   // return message
   let fixed_bytes = moonbit_str.to_bytes().to_fixedarray()
-  @ic0.reply(fixed_bytes)
+  @ic0.reply_raw(fixed_bytes)
 }
 
 // input: ()

@@ -6,6 +6,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // 1. 错误类型
+
 ///|
 suberror PrincipalError {
   BytesTooLong
@@ -25,7 +26,7 @@ fn char_at(s : String, i : Int) -> Char {
     let t : Char = '0'
     t
   } else {
-    s[i]
+    Char::from_int(s[i])
   }
 }
 
@@ -88,7 +89,7 @@ fn string_slice(s : String, start : Int, length : Int) -> String {
   if start < 0 || length < 0 || start + length > s.length() {
     ""
   } else {
-    s[start:start + length].to_string()
+    s.substring(start~, end=start + length)
   }
 }
 

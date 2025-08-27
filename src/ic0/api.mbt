@@ -1,4 +1,5 @@
 // 获取FixedArray的头指针，前8 bytes是gc头
+
 ///|
 extern "wasm" fn getptr(x : FixedArray[Byte]) -> Int =
   #|(func
@@ -38,7 +39,7 @@ pub fn trap_msg(msg : String) -> Unit {
 ///
 /// 对应 `ic_cdk::api::call::reply()`，将回复数据发送给调用方。
 /// 注意：调用此函数后应停止后续逻辑以避免重复回复。
-pub fn reply(data : FixedArray[Byte]) -> Unit {
+pub fn reply_raw(data : FixedArray[Byte]) -> Unit {
   let ptr = getptr(data)
   msg_reply_data_append(ptr, data.length())
   msg_reply()
@@ -47,7 +48,7 @@ pub fn reply(data : FixedArray[Byte]) -> Unit {
 ///| 拒绝当前调用并返回错误信息给调用方。
 ///
 /// 对应 `ic_cdk::api::call::reject(msg)`，使用拒绝代码 5 表示应用自定义错误。
-pub fn reject(msg : String) -> Unit {
+pub fn reject_with_msg(msg : String) -> Unit {
   let fixed_bytes = msg.to_bytes().to_fixedarray()
   let ptr = getptr(fixed_bytes)
   // 拒绝代码 5 代表 Canister 主动拒绝

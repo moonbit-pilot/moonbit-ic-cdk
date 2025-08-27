@@ -1,0 +1,108 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "ic-cdk-moonbit/ic0"
+
+// Values
+fn accept_message() -> Unit
+
+fn call_cycles_add(Int64) -> Unit
+
+fn call_cycles_add128(Int64, Int64) -> Unit
+
+fn call_data_append(Int, Int) -> Unit
+
+fn call_new(Int, Int, Int, Int, Int, Int, Int, Int) -> Unit
+
+fn call_on_cleanup(Int, Int) -> Unit
+
+fn call_perform() -> Int
+
+fn canister_cycle_balance() -> Int64
+
+fn canister_cycle_balance128(Int) -> Unit
+
+fn canister_self_copy(Int, Int, Int) -> Unit
+
+fn canister_self_size() -> Int
+
+fn canister_status() -> Int
+
+fn canister_version() -> Int64
+
+fn certified_data_set(Int, Int) -> Unit
+
+fn cycles_burn128(Int64, Int64, Int) -> Unit
+
+fn data_certificate_copy(Int, Int, Int) -> Unit
+
+fn data_certificate_present() -> Int
+
+fn data_certificate_size() -> Int
+
+fn debug(String) -> Unit
+
+fn debug_print(Int, Int) -> Unit
+
+fn global_timer_set(Int64) -> Int64
+
+fn in_replicated_execution() -> Int
+
+fn instruction_counter() -> Int64
+
+fn is_controller(Int, Int) -> Int
+
+fn msg_arg_data_copy(Int, Int, Int) -> Unit
+
+fn msg_arg_data_size() -> Int
+
+fn msg_caller_copy(Int, Int, Int) -> Unit
+
+fn msg_caller_size() -> Int
+
+fn msg_method_name_copy(Int, Int, Int) -> Unit
+
+fn msg_method_name_size() -> Int
+
+fn msg_reject(Int, Int) -> Unit
+
+fn msg_reject_code() -> Int
+
+fn msg_reject_msg_copy(Int, Int, Int) -> Unit
+
+fn msg_reject_msg_size() -> Int
+
+fn msg_reply() -> Unit
+
+fn msg_reply_data_append(Int, Int) -> Unit
+
+fn performance_counter(Int) -> Int64
+
+fn reject_with_msg(String) -> Unit
+
+fn reply_raw(FixedArray[Byte]) -> Unit
+
+fn stable64_grow(Int64) -> Int64
+
+fn stable64_read(Int64, Int64, Int64) -> Unit
+
+fn stable64_size() -> Int64
+
+fn stable64_write(Int64, Int64, Int64) -> Unit
+
+fn stable_read(Int, Int, Int) -> Unit
+
+fn stable_write(Int, Int, Int) -> Unit
+
+fn time() -> Int64
+
+fn trap(Int, Int) -> Unit
+
+fn trap_msg(String) -> Unit
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+
